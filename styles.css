@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(14, 9, 9);
+}
+
+.navibar {
+    overflow: hidden;
+    background-color: rgb(14, 9, 9);
+    border-bottom: solid 1px rgb(27, 17, 17);
+    height: 9%;
+}
+
+.navibar ul li {
+    list-style-type: none;
+}
+
+.navibar a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    padding: 10px;
+    margin-top: -3px;
+    font-family: Arial;
+    font-weight:bold;
+    font-size: 15.5px;
+}
+
+.navibar a:hover {
+    color: rgb(216, 205, 205);
+}
+
+.contactsmenu {
+    background-color: rgb(14, 9, 9);
+    border: solid 1px rgb(27, 17, 17);
+    height: 500px;
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 5%;
+    border-radius: 8px;
+}
+
+.contactsmenu h1 {
+    color: white;
+    font-size: 22px;
+    margin-left: 43%;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.contactsmenu p1 {
+    color: white;
+    font-size: 21px;
+    margin-left: 2%;
+    font-family: Arial;
+}
+
+.contactsmenu p1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.contactsmenu p1 a:hover {
+    color: rgb(216, 205, 205);
+}
+
+.contactsmenu p2 {
+    color: white;
+    font-size: 21px;
+    margin-left: 2%;
+}
+
+.contactsmenu p3 {
+    color: white;
+    font-size: 21px;
+    margin-left: 2%;
+}
+.mainmenu h1 {
+    color: white;
+    font-family: Arial;
+    font-weight: Bold;
+    font-size: 30px;
+    margin-left: 38%;
+}
+
+.searchmain {
+    background-color: rgb(14, 9, 9);
+    color: white;
+    margin-left: 9.5%;
+    margin-top: 0%;
+    height: 9%;
+    width: 80%;
+    border-radius: 8px;
+    font-family: Arial;
+    border: 1px solid white;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
+.pppp {
+user-select: none;
+}
+
+.Login h1 {
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 37%;
+    margin-top: -22%;
+    font-size: 23px;
+}
+
+.Login {
+    width: 300px;
+    margin-top: 5%;
+    margin-left: 24%;
+    transform: translate(50%, 50%);
+}
+
+.login input[type = 'text'], .login input[type = 'password'] {
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    margin: 20px auto;
+    border: solid 1px white;
+    border-radius: 25px;
+    padding: 15px 20px;
+}
+
+.login button {
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    margin: 20px auto;
+    border: solid 1px white;
+    border-radius: 25px;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.signup h1 {
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 35%;
+    margin-top: -22%;
+    font-size: 23px;
+}
+
+.signup {
+    width: 300px;
+    margin-top: 1%;
+    margin-left: 24%;
+    transform: translate(50%, 50%);
+}
+
+.signup input[type = 'text'], .signup input[type = 'password'] {
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    margin: 20px auto;
+    border: solid 1px white;
+    border-radius: 25px;
+    padding: 15px 20px;
+}
+
+.signup button {
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    margin: 20px auto;
+    border: solid 1px white;
+    border-radius: 25px;
+    padding: 15px 20px;
+    cursor: pointer;
+}
