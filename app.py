@@ -38,6 +38,14 @@ def index():
 
     return render_template('index.html', all_songs=all_songs)
 
+
+#@app.route('/admin')
+#def admin():
+#    if not current_user.is_admin:
+#        User.query.get_or_404(current_user.id).is_admin = True
+#        db.session.commit()
+#    return render_template('admin.html')
+
 @app.route('/beats')
 def beats():
     all_songs = Music.query.all()
