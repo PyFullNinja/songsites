@@ -23,6 +23,16 @@ class Music(db.Model):
     title = db.Column(db.String(200), nullable=False)
     file_path = db.Column(db.String(500), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    avatar_path = db.Column(db.String(500), nullable=True)
+    price_mp3 = db.Column(db.Float, nullable=True)
+    price_wav = db.Column(db.Float, nullable=True)
+    price_track_out = db.Column(db.Float, nullable=True)
+    price_exclusive = db.Column(db.Float, nullable=True)
+    genre = db.Column(db.String(100), nullable=True)
+    description = db.Column(db.Text, nullable=True)
+    bpm = db.Column(db.Integer, nullable=True)
+    key = db.Column(db.String(20), nullable=True)
+
     
     def __repr__(self):
         return f'<Music {self.title}>'
