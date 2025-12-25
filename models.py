@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=True)
+    is_admin = db.Column(db.Boolean, default=False)
     
     def __repr__(self):
         return f'<User {self.username}>'

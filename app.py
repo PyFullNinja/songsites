@@ -154,7 +154,7 @@ def upload():
 
 
 
-@app.route('order')
+@app.route('/order')
 def order():
     return render_template('order.html')
 

@@ -1,7 +1,43 @@
 {% extends "base.html" %}
 
-{% block title %}Order{% endblock %}
+{% block title %}Услуги{% endblock %}
 
 {% block content %}
+<div class="services-container">
+    <h1 class="page-title">УСЛУГИ</h1>
+    
+    <div class="cards-wrapper">
+        
+        <div class="service-card">
+            <div class="card-image-wrapper">
+                <img src="https://via.placeholder.com/400x400/222/fff?text=BEAT" alt="Custom Beat" class="card-img">
+            </div>
+            <div class="card-details">
+                <div class="card-text">
+                    <h3>Заказать бит под себя</h3>
+                    <p>Заказать бит под себя</p>
+                </div>
+                <button class="service-btn">
+                    <span class="icon"></span> Заказать
+                </button>
+            </div>
+        </div>
 
+        <div class="service-card">
+            <div class="card-image-wrapper">
+                <img src="https://via.placeholder.com/400x400/222/fff?text=MIX" alt="Mixing" class="card-img">
+            </div>
+            <div class="card-details">
+                <div class="card-text">
+                    <h3>Заказать сведение трека</h3>
+                    <p>Заказать сведение трека</p>
+                </div>
+                <button class="service-btn">
+                    <span class="icon"></span> Заказать
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}

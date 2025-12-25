@@ -346,3 +346,95 @@ body {
     border-color: #ff0000;
     transform: translate(-50%, -50%) scale(1.1);
 }
+
+/* Общий контейнер страницы */
+.services-container {
+    padding: 40px 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+/* Обертка для карточек (чтобы стояли рядом) */
+.cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Расстояние между карточками */
+    flex-wrap: wrap; /* Чтобы на телефонах переносились */
+}
+
+/* Сама карточка */
+.service-card {
+    background-color: #000; /* Или #111 для темно-серого */
+    width: 300px; /* Ширина карточки как на скрине */
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px); /* Легкое всплытие при наведении */
+}
+
+/* Блок картинки */
+.card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Делает картинку строго квадратной */
+    background-color: #222;
+    border-radius: 12px; /* Скругление самой картинки */
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполняет квадрат не искажаясь */
+}
+
+/* Текст под картинкой */
+.card-details {
+    text-align: left;
+    padding: 5px 0;
+}
+
+.card-text h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 600;
+}
+
+.card-text p {
+    margin: 5px 0 15px 0;
+    font-size: 0.9rem;
+    color: #888; /* Серый цвет для подзаголовка */
+}
+
+/* Кнопка как на скриншоте (синяя обводка) */
+.service-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #007bff; /* Синяя рамка */
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.service-btn:hover {
+    background: rgba(0, 123, 255, 0.2); /* Легкая синяя подсветка */
+}
