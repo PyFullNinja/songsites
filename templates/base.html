@@ -11,6 +11,7 @@
                 <a href="{{ url_for('index') }}" class="logo">LB</a>
                 <a href="{{ url_for('beats') }}"><li>Beats</li></a>
                 <a href="{{ url_for('contacts') }}"><li>Contacts</li></a>
+                <a href="{{ url_for('order') }}"><li>Order</li></a>
                 <a class="pppp"><li>|</li></a>
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('logout') }}"><li>Logout ({{ current_user.username }})</li></a>
