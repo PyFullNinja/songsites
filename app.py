@@ -34,7 +34,9 @@ def index():
 
 @app.route('/beats')
 def beats():
-    return render_template('beats.html')
+    all_songs = Music.query.all()
+
+    return render_template('beats.html', all_songs=all_songs)
 
 @app.route('/contacts')
 def contacts():
