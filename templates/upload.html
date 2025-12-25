@@ -1,21 +1,39 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Загрузить Бит</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    </head>
-    <body bgcolor="black">
-    <div class="uploadmenu">
-            <h1>Загрузка бита</h1>
-        <input type="text" placeholder="Цена Mp3">
-        <br>
-        <br>
-        <input type="text" placeholder="Цена Wav">
-        <br>
-        <br>
-        <input type="text" placeholder="Цена Track Out">
-        <br>
-        <br>
-        <input type="text" placeholder="Цена Exclusive">
-    </div>
-    </body>
+<head>
+    <title>Загрузка музыки</title>
+</head>
+<body>
+    <h2>Загрузить новый трек</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Название:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <label>Файл музыки (MP3/WAV):</label><br>
+        <input type="file" name="music_file" required><br><br>
+
+        <label>Обложка (Avatar):</label><br>
+        <input type="file" name="avatar_file"><br><br>
+
+        <label>Жанр:</label><br>
+        <input type="text" name="genre"><br><br>
+
+        <label>BPM:</label><br>
+        <input type="number" name="bpm"><br><br>
+
+        <label>Тональность (Key):</label><br>
+        <input type="text" name="key"><br><br>
+
+        <label>Цены (MP3 / WAV / Trackout / Exclusive):</label><br>
+        <input type="number" step="0.01" name="price_mp3" placeholder="MP3">
+        <input type="number" step="0.01" name="price_wav" placeholder="WAV">
+        <input type="number" step="0.01" name="price_track_out" placeholder="Track-out">
+        <input type="number" step="0.01" name="price_exclusive" placeholder="Exclusive"><br><br>
+
+        <label>Описание:</label><br>
+        <textarea name="description"></textarea><br><br>
+
+        <button type="submit">Опубликовать</button>
+    </form>
+</body>
 </html>
