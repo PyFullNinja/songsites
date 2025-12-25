@@ -39,13 +39,13 @@ def index():
     return render_template('index.html', all_songs=all_songs)
 
 
-@app.route('/admin')
-@login_required
-def admin():
-    if not current_user.is_admin:
-        User.query.get_or_404(current_user.id).is_admin = True
-        db.session.commit()
-    return redirect(url_for('index'))
+#@app.route('/admin')
+#@login_required
+#def admin():
+    #if not current_user.is_admin:
+        #User.query.get_or_404(current_user.id).is_admin = True
+        #db.session.commit()
+    #return redirect(url_for('index'))
 
 @app.route('/beats')
 def beats():
