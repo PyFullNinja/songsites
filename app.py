@@ -1,7 +1,9 @@
+import os
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash, secure_filename
 from models import db, User
+from models import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev-key-123'
@@ -75,12 +77,73 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+
+# Настройки папок для загрузки (можно вынести в config)
+UPLOAD_FOLDER_MUSIC = 'static/uploads/music'
+UPLOAD_FOLDER_AVATARS = 'static/uploads/avatars'
+os.makedirs(UPLOAD_FOLDER_MUSIC, exist_ok=True)
+os.makedirs(UPLOAD_FOLDER_AVATARS, exist_ok=True)
+
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
     if request.method == 'POST':
-        # Здесь будет логика загрузки музыки
-        pass
+        # 1. Получаем текстовые данные
+        title = request.form.get('title')
+        genre = request.form.get('genre')
+        bpm = request.form.get('bpm')
+        key = request.form.get('key')
+        description = request.form.get('description')
+        
+        # Получаем цены и конвертируем в float (если не пусто)
+        p_mp3 = request.form.get('price_mp3')
+        p_wav = request.form.get('price_wav')
+        p_trackout = request.form.get('price_track_out')
+        p_exclusive = request.form.get('price_exclusive')
+
+        # 2. Обработка файлов
+        music_file = request.files.get('music_file')
+        avatar_file = request.files.get('avatar_file')
+
+        if music_file and music_file.filename != '':
+            music_filename = secure_filename(music_file.filename)
+            music_path = os.path.join(UPLOAD_FOLDER_MUSIC, music_filename)
+            music_file.save(music_path)
+        else:
+            flash("Файл музыки обязателен!")
+            return redirect(request.url)
+
+        avatar_path = None
+        if avatar_file and avatar_file.filename != '':
+            avatar_filename = secure_filename(avatar_file.filename)
+            avatar_path = os.path.join(UPLOAD_FOLDER_AVATARS, avatar_filename)
+            avatar_file.save(avatar_path)
+
+        # 3. Сохранение в базу данных
+        new_music = Music(
+            title=title,
+            file_path=music_path, # Сохраняем путь к файлу
+            avatar_path=avatar_path,
+            genre=genre,
+            bpm=int(bpm) if bpm else None,
+            key=key,
+            description=description,
+            price_mp3=float(p_mp3) if p_mp3 else None,
+            price_wav=float(p_wav) if p_wav else None,
+            price_track_out=float(p_trackout) if p_trackout else None,
+            price_exclusive=float(p_exclusive) if p_exclusive else None
+        )
+
+        try:
+            db.session.add(new_music)
+            db.session.commit()
+            flash("Трек успешно загружен!")
+            return redirect(url_for('upload')) # Или на главную
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Ошибка при сохранении в базу: {e}")
+
     return render_template('upload.html')
 
 
