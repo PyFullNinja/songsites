@@ -6,5 +6,17 @@
 <div class="mainmenu">
     <h1>LEADLEAN BEATS</h1> 
     <input type="search" class="searchmain" placeholder="Search Music">
+
+    {% for song in all_songs %}
+        <div class="song">
+            <h3>{{ song.title }}</h3>
+            <audio controls>
+                <source src="{{ url_for('static', filename='uploads/music/' + song.file_path) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    {% endfor %}
+    
+
 </div>
 {% endblock %}
