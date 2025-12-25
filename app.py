@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,7 +7,7 @@ from werkzeug.utils import secure_filename
 from models import db, User
 from models import *
 from flask_migrate import Migrate
-
+from config import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev-key-123'
@@ -19,6 +20,11 @@ migrate = Migrate(app, db)
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
+
+
+
+os.makedirs(UPLOAD_FOLDER_MUSIC, exist_ok=True)
+os.makedirs(UPLOAD_FOLDER_AVATARS, exist_ok=True)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -88,10 +94,7 @@ def logout():
 
 
 # Настройки папок для загрузки (можно вынести в config)
-UPLOAD_FOLDER_MUSIC = 'static/uploads/music'
-UPLOAD_FOLDER_AVATARS = 'static/uploads/avatars'
-os.makedirs(UPLOAD_FOLDER_MUSIC, exist_ok=True)
-os.makedirs(UPLOAD_FOLDER_AVATARS, exist_ok=True)
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -168,6 +171,56 @@ def order():
 def buy(song_id):
     song = Music.query.get_or_404(song_id)
     return render_template('shop.html', song=song)
+
+
+@app.route('/create_payment/<int:song_id>/<license_type>')
+@login_required
+def create_payment(song_id, license_type):
+    song = Music.query.get_or_404(song_id)
+    
+    # Определяем цену в зависимости от лицензии
+    prices = {
+        'mp3': song.price_mp3,
+        'wav': song.price_wav,
+        'trackout': song.price_track_out,
+        'exclusive': song.price_exclusive
+    }
+    amount = prices.get(license_type)
+
+    # Запрос к Crypto Bot API
+    headers = {"Crypto-Pay-API-Token": CRYPTO_BOT_TOKEN}
+    payload = {
+        "asset": "USDT", # Можно сделать выбор валюты
+        "amount": str(amount),
+        "description": f"Покупка {song.title} ({license_type})",
+        "payload": f"order_{current_user.id}_{song.id}", # Хинт для нас
+        "paid_btn_name": "callback",
+        "paid_btn_url": url_for('index', _external=True)
+    }
+
+    response = requests.post(API_URL, json=payload, headers=headers)
+    data = response.json()
+
+    if data['ok']:
+        # Сохраняем заказ в БД
+        new_order = Order(
+            user_id=current_user.id,
+            music_id=song.id,
+            amount=amount,
+            currency="USDT",
+            invoice_id=data['result']['invoice_id']
+        )
+        db.session.add(new_order)
+        db.session.commit()
+        
+        # Перенаправляем пользователя на оплату
+        return redirect(data['result']['pay_url'])
+    else:
+        flash("Ошибка при создании счета")
+        return redirect(url_for('buy', song_id=song_id))
+
+
+
 
 
 

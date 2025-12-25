@@ -39,3 +39,12 @@ class Music(db.Model):
         return f'<Music {self.title}>'
 
 
+class Order(db.Model):
+    __tablename__ = 'orders'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    music_id = db.Column(db.Integer, db.ForeignKey('music.id'))
+    amount = db.Column(db.Float)
+    currency = db.Column(db.String(10))
+    status = db.Column(db.String(20), default='pending') # pending, paid, cancelled
+    invoice_id = db.Column(db.BigInteger) # ID счета в Crypto Bot

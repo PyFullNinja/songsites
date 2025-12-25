@@ -24,7 +24,9 @@
                         <span class="license-name">MP3 LEASE</span>
                         <span class="license-details">MP3 файл</span>
                     </div>
-                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_mp3) }}</button>
+                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='mp3') }}" class="buy-now-btn">
+                        ${{ "{:,.2f}".format(song.price_mp3) }}
+                    </a>
                 </div>
                 {% endif %}
 
@@ -34,7 +36,9 @@
                         <span class="license-name">WAV LEASE</span>
                         <span class="license-details">WAV + MP3</span>
                     </div>
-                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_wav) }}</button>
+                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='wav') }}" class="buy-now-btn">
+                        ${{ "{:,.2f}".format(song.price_wav) }}
+                    </a>
                 </div>
                 {% endif %}
 
@@ -44,7 +48,9 @@
                         <span class="license-name">TRACKOUT</span>
                         <span class="license-details">WAV + Stems (подороже)</span>
                     </div>
-                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_track_out) }}</button>
+                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='trackout') }}" class="buy-now-btn">
+                        ${{ "{:,.2f}".format(song.price_track_out) }}
+                    </a>
                 </div>
                 {% endif %}
 
@@ -54,7 +60,9 @@
                         <span class="license-name">EXCLUSIVE</span>
                         <span class="license-details">Полные права на трек</span>
                     </div>
-                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_exclusive) }}</button>
+                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='exclusive') }}" class="buy-now-btn">
+                        ${{ "{:,.2f}".format(song.price_exclusive) }}
+                    </a>
                 </div>
                 {% endif %}
             </div>
