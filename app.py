@@ -96,6 +96,9 @@ os.makedirs(UPLOAD_FOLDER_AVATARS, exist_ok=True)
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
+    if not current_user.is_admin:
+        return 
+
     if request.method == 'POST':
         # 1. Получаем текстовые данные
         title = request.form.get('title')
