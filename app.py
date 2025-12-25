@@ -161,6 +161,13 @@ def order():
     return render_template('order.html')
 
 
+@app.route('/buy/<int:song_id>')
+def buy(song_id):
+    song = Music.query.get_or_404(song_id)
+    return render_template('shop.html', song=song)
+
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

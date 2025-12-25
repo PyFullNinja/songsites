@@ -83,18 +83,6 @@ body {
     margin-left: 38%;
 }
 
-.searchmain {
-    background-color: rgb(14, 9, 9);
-    color: white;
-    margin-left: 9.5%;
-    margin-top: 0%;
-    height: 9%;
-    width: 80%;
-    border-radius: 8px;
-    font-family: Arial;
-    border: 1px solid white;
-}
-
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
@@ -437,4 +425,133 @@ body {
 
 .service-btn:hover {
     background: rgba(0, 123, 255, 0.2); /* Легкая синяя подсветка */
+}
+
+.shop-container {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.shop-wrapper {
+    display: flex;
+    gap: 40px;
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #222;
+}
+
+/* Левая часть */
+.shop-visual {
+    flex: 1;
+    text-align: center;
+}
+
+.shop-cover {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-fit: cover;
+}
+
+.shop-info-header h1 {
+    margin-top: 20px;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.shop-genre {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Правая часть (Цены) */
+.shop-pricing {
+    flex: 1.2;
+}
+
+.shop-pricing h3 {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.license-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.license-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: 0.2s;
+}
+
+.license-item:hover {
+    border-color: #007bff;
+    background: #222;
+}
+
+.license-item.highlighted {
+    border-color: #ff0000; /* Эксклюзив можно выделить красным */
+}
+
+.license-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.license-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.license-details {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.buy-now-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buy-now-btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.back-link {
+    display: block;
+    margin-top: 30px;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: #fff;
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 768px) {
+    .shop-wrapper {
+        flex-direction: column;
+    }
 }

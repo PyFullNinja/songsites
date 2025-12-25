@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Купить {{ song.title }}{% endblock %}
+
+{% block content %}
+<div class="shop-container">
+    <div class="shop-wrapper">
+        
+        <div class="shop-visual">
+            <img src="{{ url_for('static', filename=song.avatar_path.replace('static/', '')) if song.avatar_path else url_for('static', filename='default_cover.png') }}" class="shop-cover">
+            <div class="shop-info-header">
+                <h1>{{ song.title }}</h1>
+                <p class="shop-genre">{{ song.genre }} | {{ song.bpm }} BPM | {{ song.key }}</p>
+            </div>
+        </div>
+
+        <div class="shop-pricing">
+            <h3>ВЫБЕРИТЕ ТИП ЛИЦЕНЗИИ</h3>
+            
+            <div class="license-list">
+                {% if song.price_mp3 %}
+                <div class="license-item">
+                    <div class="license-info">
+                        <span class="license-name">MP3 LEASE</span>
+                        <span class="license-details">MP3 файл</span>
+                    </div>
+                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_mp3) }}</button>
+                </div>
+                {% endif %}
+
+                {% if song.price_wav %}
+                <div class="license-item">
+                    <div class="license-info">
+                        <span class="license-name">WAV LEASE</span>
+                        <span class="license-details">WAV + MP3</span>
+                    </div>
+                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_wav) }}</button>
+                </div>
+                {% endif %}
+
+                {% if song.price_track_out %}
+                <div class="license-item">
+                    <div class="license-info">
+                        <span class="license-name">TRACKOUT</span>
+                        <span class="license-details">WAV + Stems (подороже)</span>
+                    </div>
+                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_track_out) }}</button>
+                </div>
+                {% endif %}
+
+                {% if song.price_exclusive %}
+                <div class="license-item highlighted">
+                    <div class="license-info">
+                        <span class="license-name">EXCLUSIVE</span>
+                        <span class="license-details">Полные права на трек</span>
+                    </div>
+                    <button class="buy-now-btn">${{ "{:,.2f}".format(song.price_exclusive) }}</button>
+                </div>
+                {% endif %}
+            </div>
+
+            <a href="{{ url_for('beats') }}" class="back-link">← Вернуться к списку</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
