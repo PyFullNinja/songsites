@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %} - Leadlean Beats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="block">
+        <nav class="navibar">
+            <ul class="navibarbutton">
+                <a href="{{ url_for('index') }}" class="logo">LB</a>
+                <a href="{{ url_for('beats') }}"><li>Beats</li></a>
+                <a href="{{ url_for('contacts') }}"><li>Contacts</li></a>
+                <a class="pppp"><li>|</li></a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}"><li>Logout ({{ current_user.username }})</li></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><li>Login</li></a>
+                    <a href="{{ url_for('signup') }}"><li>Sign Up</li></a>
+                {% endif %}
+            </ul>
+        </nav>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div style="color: white; text-align: center; margin-top: 10px;">
+                {% for message in messages %}{{ message }}{% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
