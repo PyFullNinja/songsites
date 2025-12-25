@@ -1,22 +1,20 @@
-<html>
-    <head>
-        <title>Beats</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="block">
+{% extends "base.html" %}
 
-            <nav class="navibar">
-            <ul class="navibarbutton">
-                <a href="index.html" class="logo">LB</a>
-                <a href="beats.html"><li>Beats</li></a>
-                <a href="contacts.html"><li>Contacts</li></a>
-                <a class="pppp"><li>|</li></a>
-                <a href="login.html"><li>Login</li></a>
-                <a href="signup.html"><li>Sign Up</li></a>
-            </ul>
+{% block title %}beats{% endblock %}
 
-            </nav>
-        </div>
-    </body>
-</html>
+{% block content %}
+<div class="block">
+
+    <nav class="navibar">
+    <ul class="navibarbutton">
+        <a href="index.html" class="logo">LB</a>
+        <a href="beats.html"><li>Beats</li></a>
+        <a href="contacts.html"><li>Contacts</li></a>
+        <a class="pppp"><li>|</li></a>
+        <a href="login.html"><li>Login</li></a>
+        <a href="signup.html"><li>Sign Up</li></a>
+    </ul>
+
+    </nav>
+</div>
+{% endblock %}
