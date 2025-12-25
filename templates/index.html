@@ -1,22 +1,94 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}LEADLEAN BEATS{% endblock %}
 
 {% block content %}
-<div class="mainmenu">
-    <h1>LEADLEAN BEATS</h1> 
-    <input type="search" class="searchmain" placeholder="Search Music">
+<div class="main-container">
+    <div class="header-section">
+        <h1>LEADLEAN BEATS</h1> 
+        <input type="search" class="searchmain" placeholder="Search Music">
+    </div>
 
-    {% for song in all_songs %}
-        <div class="song">
-            <h3>{{ song.title }}</h3>
-            <audio controls>
-                <source src="{{ url_for('static', filename='uploads/music/' + song.file_path) }}" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+    <div class="beat-list">
+        <div class="beat-header">
+            <span class="col-title">TITLE</span>
+            <span class="col-time">TIME</span>
+            <span class="col-bpm">BPM</span>
+            <span class="col-tags">TAGS</span>
+            <span class="col-actions"></span>
         </div>
-    {% endfor %}
-    
 
+        {% for song in all_songs %}
+        <div class="beat-row">
+            <div class="beat-info">
+                <div class="cover-container">
+                    <img src="{{ url_for('static', filename=song.avatar_path.replace('static/', '')) if song.avatar_path else url_for('static', filename='default_cover.png') }}" class="beat-cover">
+                    
+                    <button class="play-btn" data-src="{{ url_for('static', filename='uploads/music/' + song.file_path.split('/')[-1]) }}">
+                        ▶
+                    </button>
+                </div>
+                <span class="beat-name">{{ song.title }}</span>
+            </div>
+            
+            <div class="beat-time">02:30</div>
+            <div class="beat-bpm">{{ song.bpm or '0' }}</div>
+            
+            <div class="beat-tags">
+                <span class="tag">{{ song.genre or 'BEAT' }}</span>
+            </div>
+
+            <div class="beat-actions">
+                <button class="buy-btn">${{ "{:,.2f}".format(song.price_mp3 or 0) }}</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
+<script>
+    let currentAudio = new Audio(); // Создаем объект аудио
+    let currentBtn = null;          // Запоминаем текущую кнопку
+
+    const buttons = document.querySelectorAll('.play-btn');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const songSrc = this.getAttribute('data-src');
+
+            // 1. Если нажали на ту же кнопку, которая сейчас играет -> Пауза
+            if (currentBtn === this && !currentAudio.paused) {
+                currentAudio.pause();
+                this.innerHTML = '▶'; // Меняем иконку обратно
+                this.classList.remove('playing');
+            } 
+            // 2. Если нажали на новую кнопку или музыка была на паузе
+            else {
+                // Если играла другая песня, меняем иконку старой кнопки
+                if (currentBtn && currentBtn !== this) {
+                    currentBtn.innerHTML = '▶';
+                    currentBtn.classList.remove('playing');
+                }
+
+                // Загружаем новый трек (если это новый трек)
+                if (currentAudio.src !== window.location.origin + songSrc) {
+                    currentAudio.src = songSrc;
+                }
+                
+                currentAudio.play();
+                this.innerHTML = '❚❚'; // Иконка паузы
+                this.classList.add('playing');
+                currentBtn = this;
+            }
+        });
+    });
+
+    // Когда песня заканчивается, сбрасываем иконку
+    currentAudio.addEventListener('ended', () => {
+        if (currentBtn) {
+            currentBtn.innerHTML = '▶';
+            currentBtn.classList.remove('playing');
+        }
+    });
+</script>
 {% endblock %}

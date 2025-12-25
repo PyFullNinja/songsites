@@ -153,6 +153,12 @@ def upload():
     return render_template('upload.html')
 
 
+
+@app.route('order')
+def order():
+    return render_template('order.html')
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
