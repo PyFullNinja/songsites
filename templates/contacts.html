@@ -1,33 +1,14 @@
-<html>
-    <head>
-        <title>Contacts</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="block">
+{% extends "base.html" %}
 
-            <nav class="navibar">
-            <ul class="navibarbutton">
-                <a href="index.html" class="logo">LB</a>
-                <a href="beats.html"><li>Beats</li></a>
-                <a href="contacts.html"><li>Contacts</li></a>
-                <a class="pppp"><li>|</li></a>
-                <a href="login.html"><li>Login</li></a>
-                <a href="signup.html"><li>Sign Up</li></a>
-            </ul>
+{% block title %}Contacts{% endblock %}
 
-            </nav>
-
-            <div class="contactsmenu">
-                <h1>Contacts</h1>
-                <br>
-                <br>
-                <p1>Instagram: <a href="https://www.instagram.com/leadlean/" target="_blank">*Click*</a></p>
-                <p2>YouTube: <a href="https://www.youtube.com/@leadleanbeats" target="_blank">*Click*</a></p2>
-                <br>
-                <br>
-                <p3>Telegram: <a href="https://t.me/Leadlean" target="_blank">*Click*</a></p3>
-            </div>
-        </div>
-    </body>
-</html>
+{% block content %}
+<div class="contactsmenu">
+    <h1>Contacts</h1>
+    <br><br>
+    <p>Instagram: <a href="https://www.instagram.com/leadlean/" target="_blank">*Click*</a></p>
+    <p>YouTube: <a href="https://www.youtube.com/@leadleanbeats" target="_blank">*Click*</a></p>
+    <br><br>
+    <p>Telegram: <a href="https://t.me/Leadlean" target="_blank">*Click*</a></p>
+</div>
+{% endblock %}

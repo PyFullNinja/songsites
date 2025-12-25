@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-# Импортируем нашу базу и модель
 from models import db, User
 
 app = Flask(__name__)
@@ -9,7 +8,6 @@ app.config['SECRET_KEY'] = 'dev-key-123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Связываем базу данных с приложением
 db.init_app(app)
 
 login_manager = LoginManager()
@@ -26,6 +24,14 @@ def load_user(user_id):
 def index():
     return render_template('index.html')
 
+@app.route('/beats')
+def beats():
+    return render_template('beats.html')
+
+@app.route('/contacts')
+def contacts():
+    return render_template('contacts.html')
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -37,7 +43,6 @@ def signup():
             flash('This username is already taken.')
             return redirect(url_for('signup'))
 
-        # Создаем нового пользователя с хэшированным паролем
         new_user = User(
             username=username, 
             password=generate_password_hash(password, method='pbkdf2:sha256')
@@ -70,7 +75,6 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-# Автоматическое создание таблиц при запуске
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
