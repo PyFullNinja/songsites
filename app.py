@@ -147,7 +147,7 @@ def upload():
             db.session.add(new_music)
             db.session.commit()
             flash("Трек успешно загружен!")
-            return redirect(url_for('upload')) # Или на главную
+            return redirect(url_for('index')) # Или на главную
         except Exception as e:
             db.session.rollback()
             flash(f"Ошибка при сохранении в базу: {e}")
