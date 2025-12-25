@@ -1,29 +1,19 @@
-<html>
-    <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="block">
+{% extends "base.html" %}
 
-            <nav class="navibar">
-            <ul class="navibarbutton">
-                <a href="index.html" class="logo">LB</a>
-                <a href="beats.html"><li>Beats</li></a>
-                <a href="contacts.html"><li>Contacts</li></a>
-                <a class="pppp"><li>|</li></a>
-                <a href="login.html"><li>Login</li></a>
-                <a href="signup.html"><li>Sign Up</li></a>
-            </ul>
+{% block title %}Login{% endblock %}
 
-            </nav>
-
-            <div class="container">
-                <form class="Login">
-                    <h1>LOGIN</h1>
-                    <br>
-                    <input type="text" placeholder="Login">
-                    <input type="password" placeholder="Password">
-                    <button>Login</button>
-                </form>
-            </div>
+{% block content %}
+<div class="container">
+    <form class="Login" method="POST" action="{{ url_for('login') }}">
+        <h1>LOGIN</h1>
+        <br>
+        <input type="text" name="username" placeholder="Login" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+        
+        <p style="text-align: center; color: gray; margin-top: 15px; font-family: Arial; font-size: 14px;">
+            Don't have an account? <a href="{{ url_for('signup') }}" style="color: white; text-decoration: none;">Sign Up</a>
+        </p>
+    </form>
+</div>
+{% endblock %}
