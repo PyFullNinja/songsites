@@ -12,6 +12,17 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=True)
     
-
     def __repr__(self):
         return f'<User {self.username}>'
+    
+
+class Music(db.Model):
+    __tablename__ = 'music'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    file_path = db.Column(db.String(500), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    
+    def __repr__(self):
+        return f'<Music {self.title}>'
