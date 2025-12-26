@@ -36,6 +36,7 @@ def upload():
         # 2. Обработка файлов
         music_file = request.files.get('music_file')
         avatar_file = request.files.get('avatar_file')
+        track_out_file = request.files.get('track_out_file')
 
         if music_file and music_file.filename != '':
             music_filename = secure_filename(music_file.filename)
@@ -44,6 +45,11 @@ def upload():
         else:
             flash("Файл музыки обязателен!")
             return redirect(request.url)
+        
+        if track_out_file and track_out_file.filename != '':
+            track_out_filename = secure_filename(track_out_file.filename)
+            track_out_path = os.path.join(UPLOAD_FOLDER_MUSIC, track_out_filename)
+            track_out_file.save(track_out_path)
 
         avatar_path = None
         if avatar_file and avatar_file.filename != '':
@@ -56,6 +62,7 @@ def upload():
             title=title,
             file_path=music_path, # Сохраняем путь к файлу
             avatar_path=avatar_path,
+            file_path_track_out=track_out_path,
             genre=genre,
             bpm=int(bpm) if bpm else None,
             key=key,
