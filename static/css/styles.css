@@ -9,6 +9,7 @@ body {
     background-color: rgb(14, 9, 9);
     border-bottom: solid 1px rgb(27, 17, 17);
     height: 9%;
+    z-index: 9999;
 }
 
 .navibar ul li {

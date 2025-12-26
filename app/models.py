@@ -48,3 +48,11 @@ class Order(db.Model):
     currency = db.Column(db.String(10))
     status = db.Column(db.String(20), default='pending') # pending, paid, cancelled
     invoice_id = db.Column(db.BigInteger) # ID счета в Crypto Bot
+
+class Logs(db.Model):
+    __tablename__ = 'logs'
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(45), nullable=False)
+    user_agent = db.Column(db.String(800), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    description = db.Column(db.String(1000), nullable=False)

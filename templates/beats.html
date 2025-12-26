@@ -34,7 +34,7 @@
             </div>
 
             <div class="beat-actions">
-                <a href="{{ url_for('buy', song_id=song.id) }}" style="text-decoration: none;">
+                <a href="{{ url_for('shop.buy', song_id=song.id) }}" style="text-decoration: none;">
                     <button class="buy-btn">${{ "{:,.2f}".format(song.price_mp3 or 0) }}</button>
                 </a>
             </div>
