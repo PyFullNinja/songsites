@@ -22,7 +22,8 @@ class Music(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    file_path = db.Column(db.String(500), nullable=False)
+    file_path = db.Column(db.String(500), nullable=False) #mp3
+    file_path_wav = db.Column(db.String(500), nullable=True)
     file_path_track_out = db.Column(db.String(500), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     avatar_path = db.Column(db.String(500), nullable=True)
