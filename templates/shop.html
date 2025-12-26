@@ -24,8 +24,8 @@
                         <span class="license-name">MP3 LEASE</span>
                         <span class="license-details">MP3 файл</span>
                     </div>
-                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='mp3') }}" class="buy-now-btn">
-                        ${{ "{:,.2f}".format(song.price_mp3) }}
+                    <a href="{{ url_for('shop.create_payment', song_id=song.id, license_type='mp3') }}" class="buy-now-btn">
+                        {{ (song.price_mp3 or 0) | format_price}}
                     </a>
                 </div>
                 {% endif %}
@@ -36,8 +36,8 @@
                         <span class="license-name">WAV LEASE</span>
                         <span class="license-details">WAV + MP3</span>
                     </div>
-                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='wav') }}" class="buy-now-btn">
-                        ${{ "{:,.2f}".format(song.price_wav) }}
+                    <a href="{{ url_for('shop.create_payment', song_id=song.id, license_type='wav') }}" class="buy-now-btn">
+                        {{ (song.price_wav or 0) | format_price}}
                     </a>
                 </div>
                 {% endif %}
@@ -48,8 +48,8 @@
                         <span class="license-name">TRACKOUT</span>
                         <span class="license-details">WAV + Stems (подороже)</span>
                     </div>
-                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='trackout') }}" class="buy-now-btn">
-                        ${{ "{:,.2f}".format(song.price_track_out) }}
+                    <a href="{{ url_for('shop.create_payment', song_id=song.id, license_type='trackout') }}" class="buy-now-btn">
+                        {{ (song.price_track_out) | format_price }}
                     </a>
                 </div>
                 {% endif %}
@@ -60,14 +60,14 @@
                         <span class="license-name">EXCLUSIVE</span>
                         <span class="license-details">Полные права на трек</span>
                     </div>
-                    <a href="{{ url_for('create_payment', song_id=song.id, license_type='exclusive') }}" class="buy-now-btn">
-                        ${{ "{:,.2f}".format(song.price_exclusive) }}
+                    <a href="{{ url_for('shop.create_payment', song_id=song.id, license_type='exclusive') }}" class="buy-now-btn">
+                        {{ (song.price_exclusive or 0) | format_price }}
                     </a>
                 </div>
                 {% endif %}
             </div>
 
-            <a href="{{ url_for('beats') }}" class="back-link">← Вернуться к списку</a>
+            <a href="{{ url_for('main.beats') }}" class="back-link">← Вернуться к списку</a>
         </div>
 
     </div>

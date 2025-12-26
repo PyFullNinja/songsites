@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from ..models import db, Music
 from ..logs import new_log
 from flask_login import current_user
@@ -34,3 +34,12 @@ def get_admin():
         current_user.is_admin = True
         db.session.commit()
         return redirect(url_for('main.index'))
+    
+@main_bp.route('/set-currency/<currency_code>')
+def set_currency(currency_code):
+    # Сохраняем выбор в сессию (будет храниться, пока браузер открыт)
+    if currency_code.lower() in ['rub', 'usd']:
+        session['currency'] = currency_code.lower()
+    
+    # Перенаправляем пользователя туда, откуда он пришел
+    return redirect(request.referrer or url_for('main.index'))

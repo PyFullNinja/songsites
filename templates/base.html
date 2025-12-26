@@ -13,7 +13,20 @@
                 <a href="{{ url_for('contacts.contacts') }}"><li>Contacts</li></a>
                 <a href="{{ url_for('main.order') }}"><li>Order</li></a>
                 <a class="pppp"><li>|</li></a>
-                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.order') }}"><li>Order</li></a>
+                    <a class="pppp"><li>|</li></a>
+
+                    {% set current_curr = session.get('currency', 'rub') %}
+                    <a href="{{ url_for('main.set_currency', currency_code='rub') }}" 
+                    style="{{ 'font-weight: bold; color: gold;' if current_curr == 'rub' else '' }}">
+                    <li>RUB</li>
+                    </a>
+                    <a href="{{ url_for('main.set_currency', currency_code='usd') }}" 
+                    style="{{ 'font-weight: bold; color: gold;' if current_curr == 'usd' else '' }}">
+                    <li>USD</li>
+                    </a>
+                    <a class="pppp"><li>|</li></a>
+                    {% if current_user.is_authenticated %}
                     <a href="{{ url_for('auth.logout') }}"><li>Logout ({{ current_user.username }})</li></a>
                     {% if current_user.is_admin %}
                         <a class="pppp"><li>|</li></a>
