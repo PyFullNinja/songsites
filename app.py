@@ -8,6 +8,8 @@ from models import db, User
 from models import *
 from flask_migrate import Migrate
 from config import *
+from telegram_bot import send
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev-key-123'
@@ -53,8 +55,19 @@ def beats():
 
     return render_template('beats.html', all_songs=all_songs)
 
-@app.route('/contacts')
+@app.route('/contacts', methods=['GET', 'POST'])
 def contacts():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        
+        send(f"Name: {name}\nEmail: {email}\nSubject: {subject}\nMessage: {message}")
+        
+        flash('Message sent successfully!')
+        return redirect(url_for('contacts'))
+    
     return render_template('contacts.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
