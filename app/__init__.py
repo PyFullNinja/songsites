@@ -20,6 +20,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER_MUSIC'] = UPLOAD_FOLDER_MUSIC
     app.config['UPLOAD_FOLDER_AVATARS'] = UPLOAD_FOLDER_AVATARS
+    app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500 Мегабайт)
 
     # Привязываем расширения к приложению
     db.init_app(app)
